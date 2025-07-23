@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hair Transplant Cost Calculator – India</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 700px;
+      margin: auto;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+    select, input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    .result {
+      background-color: #f1f8e9;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    h2 {
+      color: #2e7d32;
+    }
+    button {
+      background: #2e7d32;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #1b5e20;
+    }
+    .note {
+      font-size: 0.95em;
+      margin-top: 10px;
+      background: #fff3cd;
+      padding: 10px;
+      border-left: 4px solid #ffc107;
+      border-radius: 5px;
+    }
+    .cta {
+      margin-top: 30px;
+      background: #e8f5e9;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      font-size: 1.1em;
+    }
+    .cta a {
+      color: #2e7d32;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .cta a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<h2>Hair Transplant Cost Calculator – India</h2>
+
+<form onsubmit="event.preventDefault(); calculateCost();">
+  <label>Select Your City Tier:</label>
+  <select id="tier" required>
+    <option value="">Choose Tier</option>
+    <option value="Tier 1">Tier 1 – Mumbai, Delhi, Pune, Bangalore, Hyderabad, Chennai, Ahmedabad, Kolkata, Jaipur, Chandigarh, Noida, Gurgaon, Thane</option>
+    <option value="Tier 2">Tier 2 – Nagpur, Indore, Bhopal, Lucknow, Surat, Nashik, Kochi, Guwahati, Kanpur, Patna, Ludhiana, Varanasi, Rajkot, Vadodara</option>
+  </select>
+
+  <label>Choose Hair Transplant Technique:</label>
+  <select id="technique" required>
+    <option value="">Select Technique</option>
+    <option value="BIG-FUE">BIG-FUE Technique</option>
+    <option value="IMPLANTER FUE">IMPLANTER FUE Technique</option>
+    <option value="Stem Cell FUE">Stem Cell FUE</option>
+    <option value="DHI">DHI Technique</option>
+    <option value="Sapphire FUE">Sapphire FUE Hair Transplant</option>
+  </select>
+
+  <label>Enter Grafts Required:</label>
+  <input type="number" id="grafts" min="500" max="6000" placeholder="e.g., 3000" required>
+
+  <button type="submit">Calculate Cost</button>
+</form>
+
+<div class="note">
+  <strong>Note:</strong> Cost may vary city-to-city. Market price ranges between ₹30–₹70 per graft depending on clinic, technique, and surgeon experience.
+</div>
+
+<div id="result" class="result"></div>
+
+<div class="cta">
+  💬 Have Questions? <br>
+  <a href="tel:+917272832222">📞 Contact Us: +91 72728 32222</a>
+</div>
+
+<script>
+  function calculateCost() {
+    const grafts = parseInt(document.getElementById('grafts').value);
+    const tier = document.getElementById('tier').value;
+    const technique = document.getElementById('technique').value;
+
+    // Internal pricing logic (hidden from user)
+    const techniqueRates = {
+      "BIG-FUE": 45,
+      "IMPLANTER FUE": 35,
+      "Stem Cell FUE": 40,
+      "DHI": 60,
+      "Sapphire FUE": 35
+    };
+
+    const rate = techniqueRates[technique];
+    const ourCost = grafts * rate;
+    const minCost = grafts * 30;
+    const maxCost = grafts * 70;
+
+    const procedureTime = Math.ceil(grafts / 1000) + " – " + Math.ceil(grafts / 800) + " hours";
+    const recovery = "7–10 days";
+    const timeline = "Results in 3–12 months";
+
+    document.getElementById('result').innerHTML = `
+      <h3>Estimated Hair Transplant Cost</h3>
+      <strong>City Tier:</strong> ${tier}<br>
+      <strong>Technique:</strong> ${technique}<br>
+      <strong>Grafts Required:</strong> ${grafts}<br>
+      <strong>Clinic Price (₹${rate}/graft):</strong> <span style="color:green; font-weight:bold;">₹${ourCost.toLocaleString()}</span><br><br>
+
+      <strong>Market Price Comparison:</strong><br>
+      ₹${minCost.toLocaleString()} – ₹${maxCost.toLocaleString()} (₹30–₹70/graft)<br><br>
+
+      <h4>Procedure Overview:</h4>
+      <strong>Procedure Time:</strong> ${procedureTime}<br>
+      <strong>Recovery Period:</strong> ${recovery}<br>
+      <strong>Result Timeline:</strong> ${timeline}<br>
+    `;
+  }
+</script>
+
+</body>
+</html>
